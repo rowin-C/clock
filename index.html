@@ -17,7 +17,7 @@
     <title>coLck</title>
     <style>
       body {
-        background-image: url(bg.jpg);
+        background-image: url(ind.jpg);
       }
     </style>
   </head>
@@ -36,12 +36,15 @@
         "
       >
         <h1 class="display-4">Hi, <span id="location"></span></h1>
-        <h1 class="display-4">Current time Is: <span id="time"></span></h1>
-        <p class="lead">
-          Today is: <b><span id="day"></span></b>
-        </p>
+        <h1 class="display-2">Current time Is: <span id="time"></span></h1>
+        <h1 class="display-4"><span id="date"></span></h1>
+
+        <h1 class="display-4">
+          <span id="day"></span>
+        </h1>
+
         <hr class="my-4" />
-        <p>Click the button to get time from another place.</p>
+        <p>Select to get time from another place.</p>
 
         <div class="dropdown show">
           <a
@@ -53,14 +56,22 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            Select Location
+            <span id="name">India</span>
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" onclick="toggletime(1)">India</a>
-            <a class="dropdown-item" onclick="toggletime(2)">London</a>
-            <a class="dropdown-item" onclick="toggletime(3)">California</a>
-            <a class="dropdown-item" onclick="toggletime(4)">Sweden</a>
+            <a class="dropdown-item" onclick="toggletime(1),changebg(1)"
+              >India</a
+            >
+            <a class="dropdown-item" onclick="toggletime(2),changebg(2)"
+              >London</a
+            >
+            <a class="dropdown-item" onclick="toggletime(3),changebg(3)"
+              >California</a
+            >
+            <a class="dropdown-item" onclick="toggletime(4),changebg(4)"
+              >Sweden</a
+            >
           </div>
         </div>
       </div>
@@ -93,6 +104,7 @@
         }
 
         document.getElementById("location").innerHTML = loco;
+        document.getElementById("name").innerHTML = loco;
       }
 
       setInterval(() => {
@@ -111,9 +123,27 @@
           timeZone: timezone,
           weekday: "long",
         });
-        document.getElementById("time").innerHTML = time + " on " + date;
+        document.getElementById("time").innerHTML = time;
+        document.getElementById("date").innerHTML = "on " + date;
         document.getElementById("day").innerHTML = day;
       }, 1000);
+
+      var loca;
+
+      function changebg(n) {
+        if (n == 1) {
+          loca = "url(ind.jpg)";
+        } else if (n == 2) {
+          loca = "url(lon.jpg)";
+        } else if (n == 3) {
+          loca = "url(cal.jpg)";
+        } else if (n == 4) {
+          loca = "url(swe.jpg)";
+        } else {
+          loca = "url(ind.jpg)";
+        }
+        document.querySelector("body").style.backgroundImage = loca;
+      }
     </script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
