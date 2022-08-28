@@ -15,9 +15,14 @@
     />
 
     <title>coLck</title>
+    <style>
+      body {
+        background-image: url(bg.jpg);
+      }
+    </style>
   </head>
 
-  <body style="background-image: url(bg.jpg)">
+  <body>
     <div class="container my-5">
       <div
         class="jumbotron"
@@ -30,9 +35,10 @@
           border: 1px solid rgba(255, 255, 255, 0.3);
         "
       >
+        <h1 class="display-4">Hi, <span id="location"></span></h1>
         <h1 class="display-4">Current time Is: <span id="time"></span></h1>
         <p class="lead">
-          Today is : <b><span id="day"></span></b>
+          Today is: <b><span id="day"></span></b>
         </p>
         <hr class="my-4" />
         <p>Click the button to get time from another place.</p>
@@ -51,44 +57,63 @@
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">London</a>
-            <a class="dropdown-item" href="#">California</a>
-            <a class="dropdown-item" href="#">Sweden</a>
+            <a class="dropdown-item" onclick="toggletime(1)">India</a>
+            <a class="dropdown-item" onclick="toggletime(2)">London</a>
+            <a class="dropdown-item" onclick="toggletime(3)">California</a>
+            <a class="dropdown-item" onclick="toggletime(4)">Sweden</a>
           </div>
         </div>
       </div>
     </div>
     <script>
-      // @ts-check
-      let a;
-      let date;
       let time;
+      let date;
       let day;
+      let timezone;
+      let loco;
+
+      document.getElementById("location").innerHTML = "India";
+
+      function toggletime(n) {
+        if (n == 1) {
+          timezone = "Asia/Kolkata";
+          loco = "India";
+        } else if (n == 2) {
+          timezone = "Europe/London";
+          loco = "London";
+        } else if (n == 3) {
+          timezone = "America/Los_Angeles";
+          loco = "California";
+        } else if (n == 4) {
+          timezone = "Europe/Stockholm";
+          loco = "Sweden";
+        } else {
+          timezone = "Asia/Kolkata";
+          loco = "India";
+        }
+
+        document.getElementById("location").innerHTML = loco;
+      }
 
       setInterval(() => {
-        a = new Date();
-        time = `${a.getHours()}:${a.getMinutes()}:${a.getSeconds()}`;
-        date = a.toLocaleDateString();
-        day = myDate(a);
-        document.getElementById("time").innerHTML = time + " on " + date;
-      }, 1000);
+        time = new Date().toLocaleTimeString("en-US", {
+          timeZone: timezone,
+          timestyle: "medium",
+          hourcycle: "h12",
+        });
 
-      /**
-       * @param {Date} a
-       */
-      function myDate(a) {
-        const days = [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ];
-        const r = days[a.getDay()];
-        document.getElementById("day").innerHTML = r;
-      }
+        date = new Date().toLocaleDateString("en-US", {
+          timeZone: timezone,
+          dateStyle: "medium",
+        });
+
+        day = new Date().toLocaleDateString("en-US", {
+          timeZone: timezone,
+          weekday: "long",
+        });
+        document.getElementById("time").innerHTML = time + " on " + date;
+        document.getElementById("day").innerHTML = day;
+      }, 1000);
     </script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
