@@ -151,7 +151,7 @@
         document.querySelector("body").style.backgroundImage = loca;
       }
 
-      setInterval(() => {
+      function updateTime() {
         time = new Date().toLocaleTimeString("en-US", {
           timeZone: timezone,
           timestyle: "medium",
@@ -170,7 +170,10 @@
         document.getElementById("time").innerHTML = time;
         document.getElementById("date").innerHTML = "on " + date;
         document.getElementById("day").innerHTML = day;
-      }, 1000);
+      }
+
+      updateTime();
+      setInterval(updateTime, 1000);
     </script>
 
     <script
