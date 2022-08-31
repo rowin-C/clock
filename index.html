@@ -17,13 +17,52 @@
     <title>coLck</title>
     <style>
       body {
+        transition: background-image 0.5s ease-in-out;
         background-image: url(ind.jpg);
         background-repeat: no-repeat;
       }
+
+      .loa {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        background-color: #000;
+        position: fixed;
+        top: 0;
+        z-index: 2;
+        transition: opacity 0.5s cubic-bezier(0.83, 0, 0.17, 1);
+      }
+
+      .loa.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loa > div {
+        height: 100px;
+        width: 100px;
+        border: 15px solid #f3f3f3;
+        border-top-color: rgb(255, 0, 0);
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 90%;
+        animation: spin 1.5s linear infinite;
+      }
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
-
   <body>
+    <div class="loa">
+      <div class=""></div>
+    </div>
     <div class="container my-5">
       <div
         class="jumbotron"
@@ -36,7 +75,7 @@
           border: 1px solid rgba(255, 255, 255, 0.3);
         "
       >
-        <h1 class="display-4">Hi, <span id="location"></span></h1>
+        <h1 class="display-4">Hi, <span class="namet" id="location"></span></h1>
         <h1 class="display-2">Current time Is: <span id="time"></span></h1>
         <h1 class="display-4"><span id="date"></span></h1>
 
@@ -69,6 +108,11 @@
         </div>
       </div>
     </div>
+    <script>
+      setTimeout(() => {
+        document.querySelector(".loa").classList.add("hidden");
+      }, 1000);
+    </script>
     <script>
       let time;
       let date;
@@ -128,6 +172,7 @@
         document.getElementById("day").innerHTML = day;
       }, 1000);
     </script>
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
