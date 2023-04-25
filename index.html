@@ -23,6 +23,7 @@
         background-image: url(ind.jpg);
         background-repeat: no-repeat;
         background-size: cover;
+        overflow: hidden;
       }
 
       .dropdown-menu,
@@ -68,6 +69,35 @@
         100% {
           transform: rotate(360deg);
         }
+      }
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        bottom: 0;
+        width: 100%;
+        height: 65px;
+        background-color: #ffffff;
+
+        color: #000000;
+        text-align: center;
+        line-height: 50px;
+        transition: all 0.2s ease-in-out;
+      }
+      .box {
+        width: 33%;
+      }
+
+      img {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+      }
+
+      .popo:hover {
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        transform: translateY(-5px);
       }
     </style>
   </head>
@@ -145,6 +175,21 @@
         style="width: 0.1px; height: 0.1px"
         unselectable="on"
       />
+    </div>
+    <div class="footer">
+      <div class="box blank"></div>
+      <div class="box">Made with by ❤️ saubhagya</div>
+      <div class="box">
+        <a href="https://twitter.com/rowin_dev" target="_blank"
+          ><img class="popo" src="twi.png" style="scale: 0.8" alt="twitter"
+        /></a>
+        <a href="https://portfolio-rowinc.vercel.app/" target="_blank"
+          ><img class="popo" style="scale: 1.3" src="logo.png" alt=""
+        /></a>
+        <a href="https://github.com/rowin-C" target="_blank"
+          ><img class="popo" style="filter: invert()" src="gitlogo.png" alt=""
+        /></a>
+      </div>
     </div>
 
     <script>
